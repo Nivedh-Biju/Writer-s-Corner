@@ -70,6 +70,8 @@ router.post('/admin', async (req, res) => {
 
     const token = jwt.sign({ userId: user._id}, jwtSecret );
     res.cookie('token', token, { httpOnly: true });
+
+    res.cookie('username', username);//for saving username
     res.redirect('/dashboard');
 
   } catch (error) {
@@ -134,9 +136,11 @@ router.get('/add-post', authMiddleware, async (req, res) => {
 router.post('/add-post', authMiddleware, async (req, res) => {
   try {
     try {
+      const username= req.cookies.username;
       const newPost = new Post({
         title: req.body.title,
-        body: req.body.body
+        body: req.body.body,   
+        Username: username,
       });
 
       await Post.create(newPost);
