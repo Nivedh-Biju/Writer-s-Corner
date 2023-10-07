@@ -9,13 +9,21 @@
     <h2 class="articles__heading">Latest blogs</h2>
 
     <ul class="article-ul">
-        <li>
-            <a href="#">
-                <span>Post Title</span>
-                <span class="article-list__date">Date</span>
-            </a>
-        </li>
+
+        <ul>
+            <% data.forEach(Post => { %>
+            <li>
+                <a href="/post/<%= Post._id %>">
+                    <span><%= Post.title %></span>
+                    <span class="article-list__date"><%= Post.createdAt.toDateString() %></span>
+                </a>
+            </li>
+            <% }) %>
+        </ul>
+        
     </ul>
 
-    <a href="#" class="pagination">&lt; view Older blogs</a>
+    <% if (nextPage !==null) { %>
+        <a href="/?page=<%= nextPage %>" class="pagination">&lt; view Older blogs</a>
+    <% } %>
 </section>
