@@ -1,22 +1,48 @@
 <div class="admin-title">
-    <h2>Posts</h2>
-    <a href="/add-post-m" class="button">+ Add very New</a>
-  </div>
+  <h2>Posts waiting for approval</h2>
+</div>
+
+<ul class="admin-posts">
+
+  <% data.forEach(post => { %>
+    <% if (post.Approved === "no") { %>
+      <li>
+        <a href="/post/<%= post._id %>">
+          <%= post.title %> &nearr;
+        </a>
+        <div class="admin-post-controls">
+          <a href="/approve-post-m/<%= post._id %>" class="btn">Approve</a>
+          <form action="/delete-post-m/<%= post._id %>?_method=DELETE" method="POST">
+            <input type="submit" value="Delete" class="btn-delete btn">
+          </form>
+        </div>
+      </li>
+    <% } %>
+  <% }) %>
   
-  <ul class="admin-posts">
+</ul>
+
+<div class="admin-title">
+  <h2>Approved posts</h2>
+</div>
+<ul class="admin-posts">
+
+  <% data.forEach(post => { %>
+    <% if (post.Approved === "yes") { %>
+      <li>
+        <a href="/post/<%= post._id %>">
+          <%= post.title %> &nearr;
+        </a>
+        <div class="admin-post-controls">
+          <!-- <a href="/approve-post-m/<%= post._id %>" class="btn">Approve</a> -->
+          <form action="/delete-post-m/<%= post._id %>?_method=DELETE" method="POST">
+            <input type="submit" value="Delete" class="btn-delete btn">
+          </form>
+        </div>
+      </li>
+    <% } %>
+  <% }) %>
   
-    <% data.forEach(post => { %>
-        <li>
-          <a href="/post/<%= post._id %>">
-            <%= post.title %> &nearr;
-          </a>
-          <div class="admin-post-controls">
-            <a href="/edit-post-m/<%= post._id %>" class="btn">Edit</a>
-            <form action="/delete-post-m/<%= post._id %>?_method=DELETE" method="POST">
-              <input type="submit" value="Delete" class="btn-delete btn">
-            </form>
-          </div>
-        </li>
-    <% }) %>
-    
-  </ul>
+</ul>
+
+

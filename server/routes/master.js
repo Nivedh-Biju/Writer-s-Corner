@@ -110,94 +110,114 @@ router.get('/dashboard-m', authMiddleware, async (req, res) => {
  * GET /
  * Admin - Create New Post
 */
-router.get('/add-post-m', authMiddleware, async (req, res) => {
-  try {
-    const locals = {
-      title: 'Add Post',
-      description: 'Simple Blog created with NodeJs, Express & MongoDb.'
-    }
+// router.get('/add-post-m', authMiddleware, async (req, res) => {
+//   try {
+//     const locals = {
+//       title: 'Add Post',
+//       description: 'Simple Blog created with NodeJs, Express & MongoDb.'
+//     }
 
-    const data = await Post.find();
-    res.render('master/add-post-m', {
-      locals,
-      layout: adminLayout
-    });
+//     const data = await Post.find();
+//     res.render('master/add-post-m', {
+//       locals,
+//       layout: adminLayout
+//     });
 
-  } catch (error) {
-    console.log(error);
-  }
+//   } catch (error) {
+//     console.log(error);
+//   }
 
-});
+// });
 
 
-/**
- * POST /
- * Admin - Create New Post
-*/
-router.post('/add-post-m', authMiddleware, async (req, res) => {
-  try {
-    try {
-      const username= req.cookies.username;
-      const newPost = new Post({
-        title: req.body.title,
-        body: req.body.body,   
-        Username: username,
-      });
+// /**
+//  * POST /
+//  * Admin - Create New Post
+// */
+// router.post('/add-post-m', authMiddleware, async (req, res) => {
+//   try {
+//     try {
+//       const username= req.cookies.username;
+//       const newPost = new Post({
+//         title: req.body.title,
+//         body: req.body.body,   
+//         Username: username,
+//       });
 
-      await Post.create(newPost);
-      res.redirect('/dashboard-m');
-    } catch (error) {
-      console.log(error);
-    }
+//       await Post.create(newPost);
+//       res.redirect('/dashboard-m');
+//     } catch (error) {
+//       console.log(error);
+//     }
 
-  } catch (error) {
-    console.log(error);
-  }
-});
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 
 /**
  * GET /
  * Admin - Create New Post
 */
-router.get('/edit-post-m/:id', authMiddleware, async (req, res) => {
-  try {
+// router.get('/approve-post-m/:id', authMiddleware, async (req, res) => {
+//   try {
 
-    const locals = {
-      title: "Edit Post",
-      description: "Free NodeJs User Management System",
-    };
+//     const locals = {
+//       title: "Edit Post",
+//       description: "Free NodeJs User Management System",
+//     };
 
-    const data = await Post.findOne({ _id: req.params.id });
+//     // const data = await Post.findOne({ _id: req.params.id });
 
-    res.render('master/edit-post-m', {
-      locals,
-      data,
-      layout: adminLayout
-    })
+//     // res.render('master/approve-post-m', {
+//     //   locals,
+//     //   data,
+//     //   layout: adminLayout
+//     // })
 
-  } catch (error) {
-    console.log(error);
-  }
+//   } catch (error) {
+//     console.log(error);
+//   }
 
-});
+// });
 
 
 /**
  * PUT /
  * Admin - Create New Post
 */
-router.put('/edit-post-m/:id', authMiddleware, async (req, res) => {
+// router.put('/edit-post-m/:id', authMiddleware, async (req, res) => {
+//   try {
+
+//     await Post.findByIdAndUpdate(req.params.id, {
+//       title: req.body.title,
+//       body: req.body.body,
+//       updatedAt: Date.now(),
+//       Approved: "yes"
+//     });
+
+//     res.redirect(`/edit-post-m/${req.params.id}`);
+
+//   } catch (error) {
+//     console.log(error);
+//   }
+
+// });
+
+
+
+router.get('/approve-post-m/:id', authMiddleware, async (req, res) => {
   try {
 
     await Post.findByIdAndUpdate(req.params.id, {
-      title: req.body.title,
-      body: req.body.body,
-      updatedAt: Date.now(),
+      // title: req.body.title,
+      // body: req.body.body,
+      // updatedAt: Date.now(),
       Approved: "yes"
     });
 
-    res.redirect(`/edit-post-m/${req.params.id}`);
+    res.redirect(`/dashboard-m`);
 
   } catch (error) {
     console.log(error);
