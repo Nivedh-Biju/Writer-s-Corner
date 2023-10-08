@@ -11,15 +11,16 @@
     <ul class="article-ul">
 
         <ul>
-            <% data.forEach(Post => { %>
-            <li>
-                <a href="/post/<%= Post._id %>">
-                    <span><%= Post.title %></span>
-                    <span class="article-list__date"><%= Post.createdAt.toDateString() %></span>
-                </a>
-            </li>
+            <% data.filter(Post => Post.Approved === "yes").forEach(Post => { %>
+                <li>
+                    <a href="/post/<%= Post._id %>">
+                        <span><%= Post.title %></span>
+                        <span class="article-list__date"><%= Post.createdAt.toDateString() %></span>
+                    </a>
+                </li>
             <% }) %>
         </ul>
+        
         
     </ul>
 

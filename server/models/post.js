@@ -21,7 +21,11 @@ const PostSchema = new Schema({
   Username: {
     type: String,
     required: true
-  }
+  },
+  Approved: {
+    type: String,
+    default: "no"
+  },
 });
 
 module.exports = mongoose.model('Post', PostSchema);
