@@ -135,16 +135,16 @@ router.get('/add-post', authMiddleware, async (req, res) => {
  * Admin - Create New Post
 */
 router.post('/add-post', authMiddleware, async (req, res) => {
-  let summary={
-    text: 'Technology is the practical application of knowledge that has led to significant changes in society. It includes tangible tools and intangible software. Technological advancements, such as the stone tool, control of fire, and the invention of the wheel, have shaped human development. More recent inventions like the printing press, telephone, and internet have revolutionized communication and the economy. However, technology also has negative impacts like pollution and unemployment. This has led to ongoing debates about its role, ethics, and ways to address its downsides.',
-    finish_reason: 'stop',
-    model: 'gpt-3.5-turbo-030'
-  };
   //summary=summary.text;
   try {
 
+    var summary={
+      text: 'No summary avaibable',
+      finish_reason: 'stop',
+      model: 'gpt-3.5-turbo-030'
+    };
     //////////////////////////////////////////
-
+    
     const request = require('request');
 
 const options = {
@@ -157,7 +157,7 @@ const options = {
   },
   body: [
     {
-      content: req.body.body + "summarrize this",
+      content: req.body.body + "sumarrize this",
       role: 'user'
     }
   ],

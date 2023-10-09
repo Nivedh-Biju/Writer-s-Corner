@@ -29,6 +29,10 @@ const PostSchema = new Schema({
   Summary: {
     type: String,
     default: " ",
+  },
+  views: {
+    type: Number,
+    default: 0,
   }
 });
 

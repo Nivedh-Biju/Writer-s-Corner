@@ -71,8 +71,15 @@ router.get('/post/:id', async (req, res) => {
         const locals = {
             title: data.title,
             description: "simple blog post",
+            views: data.views,
         }
 
+        await Post.findByIdAndUpdate(req.params.id, {
+            views: locals.views+1,
+          });
+
+
+        data.views+=1;
         res.render('post', { locals, data }); // Corrected object structure
     } catch (error) {
         console.log(error);
