@@ -135,13 +135,50 @@ router.get('/add-post', authMiddleware, async (req, res) => {
  * Admin - Create New Post
 */
 router.post('/add-post', authMiddleware, async (req, res) => {
+  let summary={
+    text: 'Technology is the practical application of knowledge that has led to significant changes in society. It includes tangible tools and intangible software. Technological advancements, such as the stone tool, control of fire, and the invention of the wheel, have shaped human development. More recent inventions like the printing press, telephone, and internet have revolutionized communication and the economy. However, technology also has negative impacts like pollution and unemployment. This has led to ongoing debates about its role, ethics, and ways to address its downsides.',
+    finish_reason: 'stop',
+    model: 'gpt-3.5-turbo-030'
+  };
+  //summary=summary.text;
   try {
+
+    //////////////////////////////////////////
+
+    const request = require('request');
+
+const options = {
+  method: 'POST',
+  url: 'https://chatgpt-api8.p.rapidapi.com/',
+  headers: {
+    'content-type': 'application/json',
+    'X-RapidAPI-Key': '903ea57a35msh5cb879c48a015c5p18d302jsneb13607cffbb',
+    'X-RapidAPI-Host': 'chatgpt-api8.p.rapidapi.com'
+  },
+  body: [
+    {
+      content: req.body.body + "summarrize this",
+      role: 'user'
+    }
+  ],
+  json: true
+};
+
+request(options, function (error, response, body) {
+	if (error) throw new Error(error);
+
+  summary = body;
+	console.log(body);
+});
+//////////////////////////////////////////////////
     try {
       const username= req.cookies.username;
+
       const newPost = new Post({
         title: req.body.title,
         body: req.body.body,   
         Username: username,
+        Summary: summary.text,
       });
 
       await Post.create(newPost);
@@ -150,9 +187,9 @@ router.post('/add-post', authMiddleware, async (req, res) => {
       console.log(error);
     }
 
-  } catch (error) {
-    console.log(error);
-  }
+   } catch (error) {
+     console.log(error);
+   }
 });
 
 

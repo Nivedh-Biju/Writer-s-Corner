@@ -10,6 +10,7 @@
         <a href="/post/<%= post._id %>">
           <%= post.title %> &nearr;
         </a>
+        <a><%= post.Username %> </a>
         <div class="admin-post-controls">
           <a href="/approve-post-m/<%= post._id %>" class="btn">Approve</a>
           <form action="/delete-post-m/<%= post._id %>?_method=DELETE" method="POST">
@@ -33,6 +34,7 @@
         <a href="/post/<%= post._id %>">
           <%= post.title %> &nearr;
         </a>
+        <a><%= post.Username %> </a>
         <div class="admin-post-controls">
           <!-- <a href="/approve-post-m/<%= post._id %>" class="btn">Approve</a> -->
           <form action="/delete-post-m/<%= post._id %>?_method=DELETE" method="POST">

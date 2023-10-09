@@ -205,17 +205,69 @@ router.get('/dashboard-m', authMiddleware, async (req, res) => {
 
 // });
 
+// router.get('/approve-post-m/:id', authMiddleware, async (req, res) => {
+//   try{
+//   const request = require('request');
+//   const axios = require('axios');
+//   const options = {
+//     method: 'POST',
+//     url: 'https://chatgpt-api8.p.rapidapi.com/',
+//     headers: {
+//       'content-type': 'application/json',
+//       'X-RapidAPI-Key': '903ea57a35msh5cb879c48a015c5p18d302jsneb13607cffbb',
+//       'X-RapidAPI-Host': 'chatgpt-api8.p.rapidapi.com'
+//     },
+//     body: [
+//       {
+//         content: Post.body + "summarize this",
+//         role: 'user'
+//       }
+//     ],
+//     json: true
+//   };
+  
+//   request(options, function (error, response, body) {
+//     if (error) throw new Error(error);
+  
+//     console.log(body);
+//   });
+
+// try {
+//   const response = await axios.request(options);
+//   console.log(response.data);
+//   await Post.findByIdAndUpdate(req.params.id, {
+//     //Summary: response.data,
+//     Approved: "yes"
+//   });
+// } catch (error) {
+//   console.error(error);
+// }
 
 
-router.get('/approve-post-m/:id', authMiddleware, async (req, res) => {
-  try {
+// // await Post.findByIdAndUpdate(req.params.id, {
+// //   Summary: response.data,
+// //   Approved: "yes"
+// // });
 
-    await Post.findByIdAndUpdate(req.params.id, {
-      // title: req.body.title,
-      // body: req.body.body,
-      // updatedAt: Date.now(),
-      Approved: "yes"
-    });
+// res.redirect(`/dashboard-m`);
+
+// } catch (error) {
+// console.log(error);
+// }
+
+// });
+
+
+
+    router.get('/approve-post-m/:id', authMiddleware, async (req, res) => {
+      try{
+      await Post.findByIdAndUpdate(req.params.id, {
+        //Summary: response.data,
+        Approved: "yes"});
+    // await Post.findByIdAndUpdate(req.params.id, {
+    //   Summary: response.data,
+    //   Approved: "yes"
+    // });
 
     res.redirect(`/dashboard-m`);
 

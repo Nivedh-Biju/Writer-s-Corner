@@ -26,6 +26,10 @@ const PostSchema = new Schema({
     type: String,
     default: "no"
   },
+  Summary: {
+    type: String,
+    default: " ",
+  }
 });
 
 module.exports = mongoose.model('Post', PostSchema);
