@@ -261,8 +261,44 @@ router.get('/dashboard-m', authMiddleware, async (req, res) => {
 
     router.get('/approve-post-m/:id', authMiddleware, async (req, res) => {
       try{
+
+        const data = await Post.findById({ _id: req.params.id });
+
+
+        console.log(data.body);
+        s1=data.body;
+        s1=s1+" summarize this";
+        const s2 = s1;
+        const axios = require('axios');
+
+const options = {
+  method: 'POST',
+  url: 'https://chatgpt-api8.p.rapidapi.com/',
+  headers: {
+    'content-type': 'application/json',
+    'X-RapidAPI-Key': '903ea57a35msh5cb879c48a015c5p18d302jsneb13607cffbb',
+    'X-RapidAPI-Host': 'chatgpt-api8.p.rapidapi.com'
+  },
+  data: [
+    {
+      content: (String)(s2),
+      role: 'user'
+    }
+  ]
+};
+
+try {
+	const response = await axios.request(options);
+	console.log(response.data);
+// } catch (error) {
+// 	console.error(error);
+// }
+
+
+
       await Post.findByIdAndUpdate(req.params.id, {
-        //Summary: response.data,
+        //Summary: response.data
+        Summary: response.data.text,
         Approved: "yes"});
     // await Post.findByIdAndUpdate(req.params.id, {
     //   Summary: response.data,
@@ -274,6 +310,10 @@ router.get('/dashboard-m', authMiddleware, async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+
+} catch (error) {
+	console.error(error);
+}
 
 });
 
