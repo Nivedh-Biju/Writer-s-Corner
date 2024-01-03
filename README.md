@@ -15,7 +15,7 @@ Writer's Corner is a multi-user website that enables multiple users to post and 
 run the app.js file or "npm start" in the file directory
 
 # DOCUMENTATION
- - **tech stact used**: Express.js, MongoDB, Nodejs
+ - **tech stack used**: Express.js, MongoDB, Nodejs, EJS
 ## server
 
 - The models file contains the mongodb schema for post and user data
