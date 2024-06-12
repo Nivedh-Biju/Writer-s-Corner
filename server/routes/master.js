@@ -123,7 +123,7 @@ router.get('/dashboard-m', authMiddleware, async (req, res) => {
 
 const options = {
   method: 'POST',
-  url: 'https://chatgpt-api8.p.rapidapi.com/',
+  
   headers: {
   },
   data: [
