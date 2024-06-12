@@ -10,33 +10,6 @@ const jwtSecret = process.env.JWT_SECRET;
 
 
 
-// const axios = require('axios');
-
-// async function summarizer(s1) {
-//   try {
-//     const response = await axios.post('https://chatgpt-api8.p.rapidapi.com/', {
-//       content: s1 + "summarize this",
-//       role: 'user'
-//     }, {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'X-RapidAPI-Key': '2b71f52155mshcf3efdea631d0acp172739jsnb8acb7705edf',
-//         'X-RapidAPI-Host': 'chatgpt-api8.p.rapidapi.com'
-//       }
-//     });
-
-//     console.log(response.data);
-//     return response.data;
-//   } catch (error) {
-//     console.error(error);
-//     throw error; // Rethrow the error to handle it in the calling code
-//   }
-// }
-
-/**
- * 
- * Check Login
-*/
 const authMiddleware = (req, res, next ) => {
   const token = req.cookies.token;
 
@@ -185,30 +158,6 @@ router.get('/add-post', authMiddleware, async (req, res) => {
 router.post('/add-post', authMiddleware, async (req, res) => {
 
 
-  // const axios = require('axios');
-
-  // const options = {
-  //   method: 'POST',
-  //   url: 'https://chatgpt-api8.p.rapidapi.com/',
-  //   headers: {
-  //     'content-type': 'application/json',
-  //     'X-RapidAPI-Key': '2b71f52155mshcf3efdea631d0acp172739jsnb8acb7705edf',
-  //     'X-RapidAPI-Host': 'chatgpt-api8.p.rapidapi.com'
-  //   },
-  //   data: [
-  //     {
-  //       content: req.body.body + "summarize this",
-  //       role: 'user'
-  //     }
-  //   ]
-  // };
-  
-  // try {
-  //   const response = await axios.request(options);
-  //   console.log(response.data);
-  // // } catch (error) {
-  // //   console.error(error);
-  // // }
 
 
       try {
